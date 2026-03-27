@@ -16,8 +16,8 @@ export function renderTaskUserOptions(currentUser) {
     }
 }
 
-export function renderTasks(currentUser) { //función para mostrar las tareas en la interfaz, recibe un objeto user como parámetro, obtiene las tareas correspondientes al rol del usuario utilizando la función getTasksByRole() del módulo tasks.js, selecciona el elemento con id "tasks-list" y actualiza su contenido con las tareas formateadas en HTML
-    const container = document.getElementById("tasks-list");
+export function renderTasks(currentUser) { //función para mostrar las tareas en la interfaz, recibe un objeto user como parámetro, obtiene las tareas correspondientes al rol del usuario utilizando la función getTasksByRole() del módulo tasks.js, selecciona el elemento con id "task-list" y actualiza su contenido con las tareas formateadas en HTML
+    const container = document.getElementById("task-list");
     const tasks = getTasksByRole(currentUser);
 
     if (tasks.length === 0) {

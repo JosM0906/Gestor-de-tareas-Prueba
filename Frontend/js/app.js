@@ -58,7 +58,7 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
 
         const user = currentUser();
         const titulo = document.getElementById("task-title").value;
-        const fechaCreacion = document.getElementById("task-title").value;
+        const fechaCreacion = document.getElementById("task-creation-date").value;
         const fechaVencimiento = document.getElementById("task-due-date").value;
         const estado = document.getElementById("task-status").value;
         const idUsuario = Number(document.getElementById("task-user").value);
@@ -75,7 +75,7 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
             estado,
             fecha_creacion: fechaCreacion,
             fecha_vencimiento: fechaVencimiento,
-            idUsuario: idUsuario
+            id_usuario: idUsuario
         });
 
         document.getElementById("task-message").textContent = "Tarea creada exitosamente.";
@@ -94,7 +94,7 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
         const result = createUser({
             id_usuario: Date.now(),
             nombre_usuario: username,
-            contrasena: password,
+            contraseña: password,
             rol: role
         });
 
@@ -105,12 +105,6 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
             renderTaskUserOptions(currentUser());
         }
     });
-
-
-    loadApp(); //llama a la función loadApp() para cargar la aplicación al iniciar el script
-
-
-
-
-
 }
+
+loadApp(); //llama a la función loadApp() para cargar la aplicación al iniciar el script

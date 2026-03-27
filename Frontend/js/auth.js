@@ -3,7 +3,7 @@ import { getUsers, saveSession, clearSession, getSession } from "./storage.js"; 
 export function login(username, password) { //función para iniciar sesión, recibe el nombre de usuario y la contraseña como parámetros
   const users = getUsers(); //obtenemos la lista de usuarios del localstorage utilizando la función getUsers() del módulo storage.js
   const user = users.find( 
-    u => u.nombre_usuario === username && u.contrasena === password
+    u => u.nombre_usuario === username && u.contraseña === password
   );
 
   if (!user) { //si no se encuentra un usuario que coincida con el nombre de usuario y la contraseña proporcionados, se devuelve un objeto con ok: false y un mensaje de error

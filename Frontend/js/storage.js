@@ -41,11 +41,11 @@ export function seedData() { //funcion para inicializar los datos en el localsto
 
 if (!localStorage.getItem(TASKS_KEYS)) { //si no hay tareas, se crean algunas por defecto
     saveTasks([
-        { id_tarea: 1, titulo: "Revisar requerimientos", estado: "PENDIENTE", fecha_creacion: "2026-03-20", fecha_vencimiento: "2026-03-28", id_usuario: 2 },
-        { id_tarea: 2, titulo: "Diseñar esquema relacional", estado: "COMPLETADA", fecha_creacion: "2026-03-18", fecha_vencimiento: "2026-03-22", id_usuario: 2 },
-        { id_tarea: 3, titulo: "Implementar login", estado: "PENDIENTE", fecha_creacion: "2026-03-21", fecha_vencimiento: "2026-03-27", id_usuario: 3 },
-        { id_tarea: 4, titulo: "Corregir validaciones", estado: "COMPLETADA", fecha_creacion: "2026-03-19", fecha_vencimiento: "2026-03-24", id_usuario: 3 },
-        { id_tarea: 5, titulo: "Probar tareas vencidas", estado: "PENDIENTE", fecha_creacion: "2026-03-15", fecha_vencimiento: "2026-03-17", id_usuario: 2 }
+        { id_tarea: 1, titulo: "Revisar requerimientos", estado: "Pendiente", fecha_creacion: "2026-03-20", fecha_vencimiento: "2026-03-28", id_usuario: 2 },
+        { id_tarea: 2, titulo: "Diseñar esquema relacional", estado: "Completada", fecha_creacion: "2026-03-18", fecha_vencimiento: "2026-03-22", id_usuario: 2 },
+        { id_tarea: 3, titulo: "Implementar login", estado: "Pendiente", fecha_creacion: "2026-03-21", fecha_vencimiento: "2026-03-27", id_usuario: 3 },
+        { id_tarea: 4, titulo: "Corregir validaciones", estado: "Completada", fecha_creacion: "2026-03-19", fecha_vencimiento: "2026-03-24", id_usuario: 3 },
+        { id_tarea: 5, titulo: "Probar tareas vencidas", estado: "Pendiente", fecha_creacion: "2026-03-15", fecha_vencimiento: "2026-03-17", id_usuario: 2 }
             
     ]);
 }
