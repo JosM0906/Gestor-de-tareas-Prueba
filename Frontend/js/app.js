@@ -3,7 +3,7 @@ import { login, logout, currentUser, isAdmin } from "./auth.js"; //importa las f
 import { createUser } from "./users.js"; //importa la función createUser desde el módulo users.js para manejar la creación de usuarios
 import { createTask  } from "./tasks.js"; //importa las funciones relacionadas con las tareas desde el módulo tasks.js para manejar la creación, obtención y actualización de tareas
 import { validateDates } from "./validators.js"; //importa la función validateDates desde el módulo validators.js para validar las fechas de creación y vencimiento de las tareas
-import { renderTasks, renderUserInfo, renderTaskUserOptions } from "./dom.js"; //importa las funciones relacionadas con la manipulación del DOM desde el módulo dom.js para renderizar las tareas, la información del usuario y las opciones de usuario en el formulario de creación de tareas
+import { renderTasks, renderUserInfo, renderTaskUserOptions, renderFilterUserOptions } from "./dom.js"; //importa las funciones relacionadas con la manipulación del DOM desde el módulo dom.js para renderizar las tareas, la información del usuario y las opciones de usuario en el formulario de creación de tareas
 import { emitEvent, onEvent } from "./events.js"; //importa la función emitEvent desde el módulo events.js para emitir eventos personalizados en la aplicación, aunque en este código no se utiliza directamente, podría ser útil para futuras funcionalidades o para mantener una arquitectura basada en eventos
 
 
@@ -16,19 +16,23 @@ const loginForm = document.getElementById("login-form"); //obtiene el formulario
 const logoutBtn = document.getElementById("logout-btn"); //obtiene el botón de cerrar sesión del DOM
 const taskForm = document.getElementById("task-form");  //obtiene el formulario de creación de tareas del DOM
 const userForm = document.getElementById("user-form"); //obtiene el formulario de creación de usuarios del DOM
+const taskFilters = document.getElementById("task-filters"); //obtiene el contenedor de filtros de tareas del DOM, aunque en este código no se utiliza directamente, podría ser útil para futuras funcionalidades o para mantener una arquitectura basada en eventos
+const filterUser = document.getElementById("filter-user"); //obtiene el elemento de filtro de usuario del DOM, aunque en este código no se utiliza directamente, podría ser útil para futuras funcionalidades o para mantener una arquitectura basada en eventos
+const filterStatus = document.getElementById("filter-status"); //obtiene el elemento de filtro de estado del DOM, aunque en este código no se utiliza directamente, podría ser útil para futuras funcionalidades o para mantener una arquitectura basada en eventos
 
 function loadApp() { //función para cargar la aplicación, verifica si hay un usuario autenticado utilizando la función currentUser() del módulo auth.js, si no hay un usuario autenticado muestra la sección de inicio de sesión y oculta las secciones de la aplicación principal y administración, si hay un usuario autenticado muestra la sección de la aplicación principal, oculta la sección de inicio de sesión y muestra u oculta la sección de administración según el rol del usuario, luego renderiza la información del usuario y las tareas correspondientes utilizando las funciones renderUserInfo() y renderTasks() del módulo dom.js
     const user = currentUser();
 
-    if (!user) {
+    if (!user) { //si no hay un usuario autenticado, se muestra la sección de inicio de sesión y se ocultan las secciones de la aplicación principal y administración
         loginSection.classList.remove("hidden");
         appSection.classList.add("hidden");
         adminSection.classList.add("hidden");
+        taskFilters.classList.add("hidden");
         return;
     }
 
-    loginSection.classList.add("hidden");
-    appSection.classList.remove("hidden");
+    loginSection.classList.add("hidden"); //si hay un usuario autenticado, se muestra la sección de la aplicación principal, se oculta la sección de inicio de sesión y se muestra u oculta la sección de administración según el rol del usuario
+    appSection.classList.remove("hidden"); //se muestra la sección de la aplicación principal
 
     renderUserInfo(user);
     renderTaskUserOptions(user);
@@ -36,9 +40,12 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
 
     if (isAdmin()) {
         adminSection.classList.remove("hidden");
+        taskFilters.classList.remove("hidden");
+        renderFilterUserOptions();
     } else {
         adminSection.classList.add("hidden");
-    }
+        taskFilters.classList.add("hidden");
+}
 }
 
     //evento personalizado para volver a renderizar tareas
@@ -70,6 +77,24 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
         logout();
         loadApp();
     });
+
+    if (filterUser) { //agrega un evento de cambio al filtro de usuario, al cambiar la selección se vuelve a renderizar la lista de tareas para mostrar solo las tareas correspondientes al usuario seleccionado utilizando la función renderTasks() del módulo dom.js
+        filterUser.addEventListener("change", () => {
+            const user = currentUser();
+            if (user) {
+             renderTasks(user);
+            }
+        });
+    }
+
+    if (filterStatus) { //agrega un evento de cambio al filtro de estado, al cambiar la selección se vuelve a renderizar la lista de tareas para mostrar solo las tareas correspondientes al estado seleccionado utilizando la función renderTasks() del módulo dom.js
+        filterStatus.addEventListener("change", () => {
+            const user = currentUser();
+            if (user) {
+            renderTasks(user);
+            }
+        });
+    }
 
     //Crear tareas
     taskForm.addEventListener("submit", (e) => { //agrega un evento de envío al formulario de creación de tareas, al enviar el formulario se previene el comportamiento por defecto, se obtiene el título, la fecha de vencimiento, el estado y el usuario asignado para la nueva tarea, se valida que las fechas sean correctas utilizando la función validateDates() del módulo validators.js, si las fechas son válidas se crea un nuevo objeto de tarea con la información proporcionada y se llama a la función createTask() del módulo tasks.js para guardar la nueva tarea en el localstorage, luego se limpia el formulario y se vuelve a renderizar la lista de tareas para mostrar la nueva tarea creada
@@ -131,6 +156,7 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
             const user = currentUser();
             if (user) {
                 renderTaskUserOptions(user);
+                renderFilterUserOptions();
             }
         }
     });

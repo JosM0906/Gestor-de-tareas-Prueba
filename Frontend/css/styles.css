@@ -302,3 +302,15 @@ select:focus {
   }
 }
 
+.filtres{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem ;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .filtres{
+        grid-template-columns: 1fr;
+    }
+}

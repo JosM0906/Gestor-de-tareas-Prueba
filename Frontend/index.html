@@ -122,7 +122,26 @@
                 <h3>Lista de Tareas</h3>
                 <span class="badge">Panel</span>
             </div>
-            <div id="task-list" class="task-list"></div> <!--elemento para mostrar la lista de tareas, con una clase "task-list" para aplicar estilos -->
+
+            <div id="task-filters" class="filters hidden">
+                <div class="input-group">
+                    <label for="filter-user">Filtrar por usuario</label>
+                    <select id="filter-user">
+                        <option value="all">Todos</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="filter-status">Filtrar por estado</label>
+                    <select id="filter-status">
+                        <option value="all">Todos</option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Completada">Completada</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="task-list" class="task-list"></div>
         </section>
     </section>
     </main>
