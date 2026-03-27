@@ -4,65 +4,136 @@
     <meta charset="UTF-8"> <!--especifica la codificación de caracteres del documento -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--hace que el diseño sea responsivo en dispositivos móviles -->
     <title>Gestor de Tareas</title> <!--título de la página que se muestra en la pestaña del navegador -->
-    <link rel="stylesheet" href="styles.css"> <!--enlace a la hoja de estilos CSS para aplicar estilos a la página -->
+    <link rel="stylesheet" href="./css/styles.css"> <!--enlace a la hoja de estilos CSS para aplicar estilos a la página -->
 </head>
 <body>
-    <main> <!--elemento principal del documento que contiene el contenido central de la página -->
-        <section id="login-section" class="card"> <!--sección para el formulario de inicio de sesión, con una clase "card" para aplicar estilos -->
-            <h1>Iniciar Sesión</h1>
-            <form id="login-form">
-                <input type="text" id="login-username" placeholder="Usuario" required>
-                <input type="password" id="login-password" placeholder="Contraseña" required>
-                <button type="submit">Iniciar Sesión</button>
-            </form>
-            <p id="login-message"></p>
+    <main class="container"> <!--elemento principal del documento que contiene el contenido central de la página -->
+        <section id="login-section" class="card login-card" > <!--sección para el formulario de inicio de sesión, con una clase "card" para aplicar estilos -->
+            <div class="brand">
+                <h1>Gestor de Tareas</h1>
+                <p>Organiza, administra y da seguimiento a tus actividades</p>
+            </div>
+
+        <form id="login-form" class="form-grid"><!--formulario para el inicio de sesión, con una clase "form-grid" para aplicar estilos de diseño en cuadrícula -->
+            <div class="input-group"> <!--grupo de entrada para el campo de usuario, con una clase "input-group" para aplicar estilos -->
+                <label for="login-username">Usuario</label>
+                <input type="text" id="login-username" placeholder="Ingresa tu usuario" required>
+            </div>
+
+            <div class="input-group"> <!--grupo de entrada para el campo de contraseña, con una clase "input-group" para aplicar estilos -->
+                <label for="login-password">Contraseña</label>
+                <input type="password" id="login-password" placeholder="Ingresa tu contraseña" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button> <!--botón para enviar el formulario de inicio de sesión, con una clase "btn" para aplicar estilos -->
+        </form>
+
+        <p id="login-message" class="message"></p> <!--elemento para mostrar mensajes relacionados con el inicio de sesión, con una clase "message" para aplicar estilos -->
         </section>
 
         <section id="app-section" class="hidden"> <!--sección para la aplicación principal, inicialmente oculta con la clase "hidden" -->
-            <header class="topbar"> <!--encabezado de la aplicación con una clase "topbar" para aplicar estilos -->
+            <header class="topbar card">
                 <div>
-                    <h2>Gestor de Tareas</h2>
-                    <p id="current-user-info"></p> <!--elemento para mostrar información del usuario actual y rol-->
+                <h2>Gestor de Tareas</h2>
+                    <p id="current-user-info" class="user-info"></p>
                 </div>
-                <button id="logout-button">Cerrar Sesión</button>
+                <button id="logout-button" class="btn btn-outline">Cerrar Sesión</button>
             </header>
 
-            <section id="admin-section" class="card hidden"> <!--seccion para administradores de usuarios, puede mostrarse solo si quien inicia sesion es admin -->
+        
+        <section id="admin-section" class="card hidden"> <!--sección para la administración de usuarios, inicialmente oculta con la clase "hidden" -->
+            <div class="section-title">
                 <h3>Crear Usuarios</h3>
-                <form id="user-form"> <!--formulario para crear nuevos usuarios, con campos para nombre de usuario, contraseña y rol -->
-                    <input type="text" id="new-username" placeholder="Nuevo Usuario" required>
-                    <input type="password" id="new-password" placeholder="Contraseña" required>
-                    <select id="new-role">
-                        <option value="Usuario">Usuario</option>
+                <span class="badge">Administrador</span>
+            </div>
+
+            <form id="user-form" class="form-grid two-columns"> <!--formulario para crear nuevos usuarios, con una clase "form-grid" para aplicar estilos de diseño en cuadrícula y "two-columns" para organizar los campos en dos columnas -->
+                <div class="input-group">
+                    <label for="new-username">Nuevo Usuario</label>
+                    <input type="text" id="new-username" placeholder="Ingresa el nombre de usuario" required>
+                </div>
+
+                <div class="input-group"> <!--grupo de entrada para el campo de contraseña del nuevo usuario, con una clase "input-group" para aplicar estilos -->
+                    <label for="new-password">Contraseña</label>
+                    <input type="password" id="new-password" placeholder="Ingresa la contraseña" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="new-role">Rol</label>
+                    <select id="new-role" required>
                         <option value="Administrador">Administrador</option>
+                        <option value="Usuario">Usuario</option>
                     </select>
-                    <button type="submit">Crear Usuario</button> 
-                </form>
-                <p id="user-message"></p> <!--elemento para mostrar mensajes relacionados con la creación de usuarios, como éxito o error -->
-            </section>
+                </div>
 
-            <section class="card"> <!--sección para la creacion de tareas -->
-                <h3>Crear Tarea</h3>
-                <form id="task-form"> <!--formulario para crear nuevas tareas, con campos para título, fecha de creación, fecha de vencimiento y estado -->
-                <input type="text" id="task-tittle" placeholder="Título de la tarea" required> <!--campo de texto para el título de la tarea, con un marcador de posición y marcado como obligatorio -->
-                <input type="date" id="task-created-at" required>
-                <input type="date" id="task-due-date" required>
-                <select id="task-status" required> <!--campo de selección para el estado de la tarea, con opciones para "Pendiente" y "Completada", marcado como obligatorio -->
-                    <option value="Pendiente">Pendiente</option>
-                    <option value="Completada">Completada</option>
-                </select>
-                <select id="task-user" required></select> <!--campo de selección para asignar la tarea a un usuario, marcado como obligatorio, las opciones se llenarán dinámicamente con los usuarios disponibles -->
-                <button type="submit">Guardar Tarea</button>
-                </form>
-                <p id="task-message"></p><!--elemento para mostrar mensajes relacionados con la creación de tareas, como éxito o error -->
-            </section>
+                <div class="input-group button-group"> <!--grupo de entrada para el botón de envío del formulario, con una clase "input-group" para aplicar estilos y "button-group" para organizar el botón -->
+                    <button type="submit" class="btn btn-primary">Crear Usuario</button>
+                </div>
+            </form>
 
-            <section class="card"><!--sección para mostrar el listado de tareas -->
-                <h3>Listado de Tareas</h3>
-                <div id="task-list"></div>
-            </section>
+            <p id="user-message" class="message"></p> <!--elemento para mostrar mensajes relacionados con la creación de usuarios, con una clase "message" para aplicar estilos -->
         </section>
-    </main>
 
+        <section class="card"> <!--sección para crear nuevas tareas, con una clase "card" para aplicar estilos -->
+            <div class="section-title">
+                <h3>Crear Tareas</h3>
+                <span class="badge badge-soft">Nueva</span>
+            </div>
+
+            <form id="task-form" class="form-grid task-grid"> <!--formulario para crear nuevas tareas, con una clase "form-grid" para aplicar estilos de diseño en cuadrícula y "task-grid" para organizar los campos relacionados con las tareas -->
+                <div class="input-group">
+                    <label for="task-title">Título</label>
+                    <input type="text" id="task-title" placeholder="Ingresa el título de la tarea" required>
+                </div>
+
+                <div class="input-group"> <!--grupo de entrada para el campo de descripción de la tarea, con una clase "input-group" para aplicar estilos -->
+                    <label for="task-created-at">Fecha de creación</label>
+                    <input type="date" id="task-created-at" required>
+                </div>
+
+                <div class="input-group"> <!--grupo de entrada para el campo de fecha límite de la tarea, con una clase "input-group" para aplicar estilos -->
+                    <label for="task-due-date" required>Fecha de vencimiento</label>
+                    <input type="date" id="task-due-date">
+                </div>
+
+                <div class="input-group">
+                    <label for="task-status">Estado</label>
+                    <select id="task-status" required>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="completada">Completada</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="task-user">Asignar a</label>
+                    <select id="task-user" required></select>
+                </div>
+
+                <div class="input-group button-group">
+                    <button type="submit" class="btn btn-primary">guardar Tarea</button>
+                </div>
+            </form>
+
+            <p id="task-message" class="message"></p> <!--elemento para mostrar mensajes relacionados con la creación de tareas, con una clase "message" para aplicar estilos -->
+        </section>
+
+        <section class="card">
+            <div class="section-title">
+                <h3>Lista de Tareas</h3>
+                <span class="badge">Panel</span>
+            </div>
+            <div id="task-list" class="task-list"></div> <!--elemento para mostrar la lista de tareas, con una clase "task-list" para aplicar estilos -->
+        </section>
+    </section>
+    </main>
+    <script src="./js/app.js"></script> <!--enlace al archivo JavaScript para agregar interactividad a la página -->
 </body>
 </html>
+
+
+
+
+
+
+
+       
