@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <section id="login-section" class="card">
+            <h1>Iniciar Sesión</h1>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Usuario" required>
+                <input type="password" id="login-password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+            <p id="login-message"></p>
+        </section>
+
+        <section id="app-section" class="hidden">
+            <header class="topbar">
+                <div>
+                    <h2>Gestor de Tareas</h2>
+                    <p id="current-user-info"></p>
+                </div>
+                <button id="logout-button">Cerrar Sesión</button>
+            </header>
+
+            <section id="admin-section" class="card hidden">
+                <h3>Crear Usuarios</h3>
+                <form id="user-form">
+                    <input type="text" id="new-username" placeholder="Nuevo Usuario" required>
+                    <input type="password" id="new-password" placeholder="Contraseña" required>
+                    <select id="new-role">
+                        <option value="Usuario">Usuario</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                    <button type="submit">Crear Usuario</button>
+                </form>
+                <p id="user-message"></p>
+            </section>
+
+            <section class="card">
+                <h3>Crear Tarea</h3>
+                <form id="task-form">
+                <input type="text" id="task-tittle" placeholder="Título de la tarea" required>
+                <input type="date" id="task-created-at" required>
+                <input type="date" id="task-due-date" required>
+                <select id="task-status" required>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Completada">Completada</option>
+                </select>
+                <select id="task-user" required></select>
+                <button type="submit">Guardar Tarea</button>
+                </form>
+                <p id="task-message"></p>
+            </section>
+
+            <section class="card">
+                <h3>Listado de Tareas</h3>
+                <div id="task-list"></div>
+            </section>
+        </section>
+    </main>
+
+</body>
+</html>
