@@ -1,21 +1,21 @@
-const USERS_KEYS = "usuarios"; //constante donde se guardaran los usuarios en locastorage
-const TASKS_KEYS = "tareas"; //constante donde se guardaran las tareas en locastorage
+const USERS_KEY = "usuarios"; //constante donde se guardaran los usuarios en locastorage
+const TASKS_KEY = "tareas"; //constante donde se guardaran las tareas en locastorage
 const SESSION_KEY = "sesion"; //constante donde se guardara la sesion en locastorage
 
 export function getUsers() { //fucion para obtener los usuarios del localstorage, si no hay usuarios devuelve un array vacio
-    return JSON.parse(localStorage.getItem(USERS_KEYS)) || [];
+    return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
 }
 
 export function saveUsers(users) { //funcion para guardar un nuevo usuario en el localstorage, recibe un objeto user como parametro
-    localStorage.setItem(USERS_KEYS, JSON.stringify(users));
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
 export function getTasks() { //funcion para obtener las tareas del localstorage, si no hay tareas devuelve un array vacio
-    return JSON.parse(localStorage.getItem(TASKS_KEYS)) || [];
+    return JSON.parse(localStorage.getItem(TASKS_KEY)) || [];
 }
 
 export function saveTasks(tasks) { //funcion para guardar una nueva tarea en el localstorage, recibe un objeto task como parametro
-    localStorage.setItem(TASKS_KEYS, JSON.stringify(tasks));
+    localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
 }
 
 export function getSession() { //funcion para obtener la sesion del localstorage, si no hay sesion devuelve null
@@ -31,7 +31,7 @@ export function clearSession() { //funcion para eliminar la sesion del localstor
 }
 
 export function seedData() { //funcion para inicializar los datos en el localstorage, si no hay usuarios ni tareas, se crean algunos por defecto
-    if (!localStorage.getItem(USERS_KEYS)) { 
+    if (!localStorage.getItem(USERS_KEY)) { 
         saveUsers([
             {id_usuario: 1, nombre_usuario: "admin", contraseña: "Admin123", rol: "Administrador"},
             {id_usuario: 2, nombre_usuario: "josmary", contraseña: "Josmary123", rol: "Usuario"},
@@ -39,7 +39,7 @@ export function seedData() { //funcion para inicializar los datos en el localsto
         ]);
     }
 
-if (!localStorage.getItem(TASKS_KEYS)) { //si no hay tareas, se crean algunas por defecto
+if (!localStorage.getItem(TASKS_KEY)) { //si no hay tareas, se crean algunas por defecto
     saveTasks([
         { id_tarea: 1, titulo: "Revisar requerimientos", estado: "Pendiente", fecha_creacion: "2026-03-20", fecha_vencimiento: "2026-03-28", id_usuario: 2 },
         { id_tarea: 2, titulo: "Diseñar esquema relacional", estado: "Completada", fecha_creacion: "2026-03-18", fecha_vencimiento: "2026-03-22", id_usuario: 2 },

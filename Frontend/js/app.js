@@ -76,7 +76,7 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
         e.preventDefault();
 
         const user = currentUser();
-        const titulo = document.getElementById("task-title").value;
+        const titulo = document.getElementById("task-title").value.trim();
         const fechaCreacion = document.getElementById("task-created-at").value;
         const fechaVencimiento = document.getElementById("task-due-date").value;
         const estado = document.getElementById("task-status").value;
@@ -113,8 +113,8 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
             userForm.addEventListener("submit", (e) => { //agrega un evento de envío al formulario de creación de usuarios, al enviar el formulario se previene el comportamiento por defecto, se obtiene el nombre de usuario, la contraseña y el rol para el nuevo usuario, se crea un nuevo objeto de usuario con la información proporcionada y se llama a la función createUser() del módulo users.js para guardar el nuevo usuario en el localstorage, luego se limpia el formulario y se muestra un mensaje indicando si el usuario fue creado exitosamente o si hubo un error (por ejemplo, si el nombre de usuario ya está en uso)
                 e.preventDefault(); 
 
-            const username = document.getElementById("new-username").value; //obtenemos el nombre de usuario ingresado en el formulario de creación de usuarios
-            const password = document.getElementById("new-password").value; //obtenemos la contraseña ingresada en el formulario de creación de usuarios
+            const username = document.getElementById("new-username").value.trim(); //obtenemos el nombre de usuario ingresado en el formulario de creación de usuarios
+            const password = document.getElementById("new-password").value.trim(); //obtenemos la contraseña ingresada en el formulario de creación de usuarios
             const role = document.getElementById("new-role").value;
 
         const result = createUser({ //creamos un nuevo objeto de usuario con la información proporcionada, el id del usuario se genera utilizando Date.now() para asegurar que sea único, luego se llama a la función createUser() del módulo users.js para guardar el nuevo usuario en el localstorage

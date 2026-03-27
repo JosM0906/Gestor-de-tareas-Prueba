@@ -1,6 +1,7 @@
 import { getTasksByRole, toggleTaskStatus } from "./tasks.js"; //importamos las funciones necesarias del módulo tasks.js para manejar las tareas según el rol del usuario y cambiar el estado de las tareas
 import { getUsers } from "./storage.js"; //importamos la función getUsers() del módulo storage.js para obtener la lista de usuarios
 import { onEvent } from "./events.js"; //importamos la función onEvent() del módulo events.js para escuchar eventos personalizados
+import { currentUser } from "./auth.js"; //importamos la función currentUser() del módulo auth.js para obtener el usuario actualmente autenticado
 
 onEvent("taskUpdated", () => {
     const user = currentUser();

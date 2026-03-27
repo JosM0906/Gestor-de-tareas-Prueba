@@ -1,4 +1,4 @@
-export function validateRequire(value) { //función para validar que un campo no esté vacío, recibe el valor del campo como parámetro y devuelve true si el valor no es una cadena vacía después de eliminar los espacios en blanco, de lo contrario devuelve false
+export function validateRequired(value) { //función para validar que un campo no esté vacío, recibe el valor del campo como parámetro y devuelve true si el valor no es una cadena vacía después de eliminar los espacios en blanco, de lo contrario devuelve false
     return value && value.trim() !== "";
 }
 
