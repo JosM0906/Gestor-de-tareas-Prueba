@@ -1,3 +1,82 @@
-*{
-    box-sizing: border-box;
+*{ /*aplica a todos los elementos de la pagina*/
+    box-sizing: border-box; /*hace que el widht y height incluyan padding y border lo cual facilita controlar los tamaños*/
+}
+
+body { /*estilos para el cuerpo de la pagina*/
+    margin: 0; /*elimina el margen por defecto del body para que el diseño ocupe toda la pantalla sin espacios no deseados*/
+    font-family: Arial, sans-serif; /*define la fuente principal de la pagina*/
+    background-color: #f4f4f4;/*color de fondo*/
+    color: #222;/*color del texto*/
+}
+
+.container{/* contenedor principal */
+    width: min(1100px, 90%);/*establece un ancho máximo de 1100px pero se adapta al 90% del ancho de la pantalla en dispositivos más pequeños para mantener un diseño responsivo */
+    margin: 2rem auto;/* da espacio y centra horizontalmente*/
+}
+
+.card{ /*estilos para las tarjetas que contienen secciones como el formulario de tareas y el listado de tareas*/
+    background: white;
+    border-radius: 14px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.8);
+}
+
+.hidden{ /*clase para ocultar elementos, se utiliza para mostrar u ocultar secciones como la de administración de usuarios dependiendo del rol del usuario que inicia sesión*/
+    display: none; /*oculta completamente un elemento*/
+}
+
+.topbar{ /*estilos para la barra superior que contiene el título de la aplicación y el botón de cerrar sesión*/
+    display: flex; /*coloca los elementos de la fila*/
+    justify-content: space-between;/*separa los elementos, uno a la izquierda y otro a la derecha*/
+    align-items: center; /*centra verticalmente los elementos dentro de la barra*/
+    padding: 1rem; /*espaciado interno para que los elementos no estén pegados a los bordes de la barra*/
+    margin-bottom: 1rem;/*espacio debajo de la barra para separar visualmente del resto del contenido*/
+}
+
+form {
+    display: flex; /*coloca los elementos del formulario en una fila*/
+    flex-wrap: wrap; /*permite que los elementos del formulario se ajusten a la siguiente línea si no caben en una sola fila, lo cual es útil para mantener un diseño responsivo en dispositivos más pequeños*/
+    gap: 1rem;
+}
+
+button { /*estilos para los botones de la aplicación, como el botón de cerrar sesión y el botón de guardar tarea*/
+    padding: 0.5rem 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.task-card{ /*estilos para las tarjetas individuales que representan cada tarea en el listado de tareas, con un borde lateral que cambia de color según el estado de la tarea (pendiente, completada, vencida)*/
+    border-left: 6px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    border-radius: 12px;
+    background: #fafafa;
+}
+
+.task-card.pending{ /*estilos para las tarjetas de tareas pendientes*/
+    border-left-color: #d4a017;
+}
+
+.task-card.completed{ /*estilos para las tarjetas de tareas completadas*/
+    border-left-color: #2e8b57;
+}
+
+.task-card.overdue{ /*estilos para las tarjetas de tareas vencidas*/
+    border-left-color: #c62828;
+    background: #fff3f3;
+}
+
+/*media query para pantallas con un ancho máximo de 768px, lo que incluye la mayoría de los dispositivos móviles, para ajustar el diseño y mejorar la usabilidad en pantallas más pequeñas*/
+@media (max-width: 768px) { 
+    form{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #task-form{
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
