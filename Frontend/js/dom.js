@@ -6,7 +6,7 @@ export function renderUserInfo(user) { //función para mostrar la información d
     document.getElementById("current-user-info").textContent = `${user.nombre_usuario} (${user.rol})`;
 }
 
-export function renderTaskUserOptions(currentUser) {  //función para mostrar las opciones de usuario en el formulario de creación de tareas, recibe un objeto currentUser como parámetro, selecciona el elemento con id "task-user" y obtiene la lista de usuarios utilizando la función getUsers() del módulo storage.js, si el rol del usuario es "Administrador" muestra una opción para cada usuario en la lista, de lo contrario muestra solo la opción del usuario actualmente autenticado
+export function renderTaskUserOptions(currentUser) {  //función para mostrar las opciones de usuario en el formulario de creación de tareas
     const select = document.getElementById("task-user");
     const users = getUsers();
 
@@ -17,7 +17,7 @@ export function renderTaskUserOptions(currentUser) {  //función para mostrar la
     }
 }
 
-export function renderFilterUserOptions() { //función para mostrar las opciones de usuario en el filtro de tareas, selecciona el elemento con id "filter-user" y obtiene la lista de usuarios utilizando la función getUsers() del módulo storage.js, si el elemento existe muestra una opción para cada usuario en la lista además de una opción "Todos", utilizando el método map() del array para crear una cadena de opciones HTML y luego se asigna al contenido del elemento select
+export function renderFilterUserOptions() { //función para mostrar las opciones de usuario en el filtro de tareas, selecciona el elemento con id "filter-user" y obtiene la lista de usuarios 
     const filterUser = document.getElementById("filter-user");
     const users = getUsers();
 
@@ -29,7 +29,7 @@ export function renderFilterUserOptions() { //función para mostrar las opciones
     `;
 }
 
-export function renderTasks(currentUser) { //función para mostrar las tareas correspondientes al usuario actualmente autenticado, recibe un objeto currentUser como parámetro, selecciona el elemento con id "task-list" y los elementos de filtro de usuario y estado, crea un objeto filters con los valores seleccionados en los filtros, obtiene la lista de tareas filtradas utilizando la función getFilteredTasks() del módulo tasks.js con el usuario actual y los filtros aplicados, si no hay tareas muestra un mensaje indicando que no hay tareas asignadas, de lo contrario genera el HTML para cada tarea utilizando el método map() del array y asigna el contenido al elemento container, luego agrega un evento de clic a cada botón de cambio de estado para llamar a la función toggleTaskStatus() del módulo tasks.js con el id de la tarea correspondiente y volver a renderizar las tareas
+export function renderTasks(currentUser) { //función para mostrar las tareas correspondientes al usuario actualmente autenticado
     const container = document.getElementById("task-list");
 
     const filterUser = document.getElementById("filter-user");

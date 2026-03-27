@@ -20,7 +20,7 @@ const taskFilters = document.getElementById("task-filters"); //obtiene el conten
 const filterUser = document.getElementById("filter-user"); //obtiene el elemento de filtro de usuario del DOM, aunque en este código no se utiliza directamente, podría ser útil para futuras funcionalidades o para mantener una arquitectura basada en eventos
 const filterStatus = document.getElementById("filter-status"); //obtiene el elemento de filtro de estado del DOM, aunque en este código no se utiliza directamente, podría ser útil para futuras funcionalidades o para mantener una arquitectura basada en eventos
 
-function loadApp() { //función para cargar la aplicación, verifica si hay un usuario autenticado utilizando la función currentUser() del módulo auth.js, si no hay un usuario autenticado muestra la sección de inicio de sesión y oculta las secciones de la aplicación principal y administración, si hay un usuario autenticado muestra la sección de la aplicación principal, oculta la sección de inicio de sesión y muestra u oculta la sección de administración según el rol del usuario, luego renderiza la información del usuario y las tareas correspondientes utilizando las funciones renderUserInfo() y renderTasks() del módulo dom.js
+function loadApp() { //función para cargar la aplicación, verifica si hay un usuario autenticado
     const user = currentUser();
 
     if (!user) { //si no hay un usuario autenticado, se muestra la sección de inicio de sesión y se ocultan las secciones de la aplicación principal y administración
@@ -57,7 +57,10 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
     });
 
     //Login
-    loginForm.addEventListener("submit", (e) => { //agrega un evento de envío al formulario de inicio de sesión, al enviar el formulario se previene el comportamiento por defecto, se obtiene el nombre de usuario y la contraseña ingresados, se llama a la función login() del módulo auth.js con las credenciales proporcionadas, si el inicio de sesión es exitoso se carga la aplicación llamando a la función loadApp(), de lo contrario se muestra un mensaje de error en el elemento con id "login-message"
+    //agrega un evento de envío al formulario de inicio de sesión, al enviar el formulario se previene el comportamiento por defecto, 
+    // se obtiene el nombre de usuario y la contraseña ingresados, se llama a la función login() del módulo auth.js con las credenciales proporcionadas, si el inicio de sesión es exitoso se carga la aplicación llamando a la función loadApp(),
+    //  de lo contrario se muestra un mensaje de error en el elemento con id "login-message"
+    loginForm.addEventListener("submit", (e) => { 
         e.preventDefault();
 
         const username = document.getElementById("login-username").value.trim();
@@ -97,7 +100,8 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
     }
 
     //Crear tareas
-    taskForm.addEventListener("submit", (e) => { //agrega un evento de envío al formulario de creación de tareas, al enviar el formulario se previene el comportamiento por defecto, se obtiene el título, la fecha de vencimiento, el estado y el usuario asignado para la nueva tarea, se valida que las fechas sean correctas utilizando la función validateDates() del módulo validators.js, si las fechas son válidas se crea un nuevo objeto de tarea con la información proporcionada y se llama a la función createTask() del módulo tasks.js para guardar la nueva tarea en el localstorage, luego se limpia el formulario y se vuelve a renderizar la lista de tareas para mostrar la nueva tarea creada
+    //agrega un evento de envío al formulario de creación de tareas, hac la validacion correspondiente
+    taskForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
         const user = currentUser();
@@ -133,9 +137,10 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
     });
 
 
+
         //crear usuarios
         if (userForm) {
-            userForm.addEventListener("submit", (e) => { //agrega un evento de envío al formulario de creación de usuarios, al enviar el formulario se previene el comportamiento por defecto, se obtiene el nombre de usuario, la contraseña y el rol para el nuevo usuario, se crea un nuevo objeto de usuario con la información proporcionada y se llama a la función createUser() del módulo users.js para guardar el nuevo usuario en el localstorage, luego se limpia el formulario y se muestra un mensaje indicando si el usuario fue creado exitosamente o si hubo un error (por ejemplo, si el nombre de usuario ya está en uso)
+            userForm.addEventListener("submit", (e) => { //agrega un evento de envío al formulario de creación de usuarios, al enviar el formulario se previene el comportamiento por defecto
                 e.preventDefault(); 
 
             const username = document.getElementById("new-username").value.trim(); //obtenemos el nombre de usuario ingresado en el formulario de creación de usuarios

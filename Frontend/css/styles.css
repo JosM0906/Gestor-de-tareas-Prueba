@@ -58,18 +58,18 @@ body {
   padding: 2rem;
 }
 
-.brand {
+.brand { /*estilos para la seccion de marca en el login*/
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
-.brand h1 {
+.brand h1 { /* Título principal de la marca */
   margin: 0 0 0.5rem;
   font-size: 2rem;
   color: var(--gray-900);
 }
 
-.brand p {
+.brand p { /* Descripción o lema de la marca */
   margin: 0;
   color: var(--gray-700);
   font-size: 0.95rem;
