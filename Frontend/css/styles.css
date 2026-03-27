@@ -302,7 +302,7 @@ select:focus {
   }
 }
 
-.filtres{
+.filters{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem ;
@@ -310,7 +310,7 @@ select:focus {
 }
 
 @media (max-width: 768px) {
-    .filtres{
+    .filters{
         grid-template-columns: 1fr;
     }
 }
