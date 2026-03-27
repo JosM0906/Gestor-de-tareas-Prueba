@@ -1,4 +1,4 @@
-import { seedData } from "./storege.js"; //importa la función seedData desde el módulo storege.js para inicializar los datos en el localstorage
+import { seedData } from "./storage.js"; //importa la función seedData desde el módulo storege.js para inicializar los datos en el localstorage
 import { login, logout, currentUser, isAdmin } from "./auth.js"; //importa las funciones relacionadas con la autenticación desde el módulo auth.js
 import { createUser } from "./users.js"; //importa la función createUser desde el módulo users.js para manejar la creación de usuarios
 import { createTask  } from "./tasks.js"; //importa las funciones relacionadas con las tareas desde el módulo tasks.js para manejar la creación, obtención y actualización de tareas
