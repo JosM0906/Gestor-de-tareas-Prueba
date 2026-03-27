@@ -26,7 +26,11 @@ export function saveSession(user) { //funcion para guardar la sesion en el local
     localStorage.setItem(SESSION_KEY, JSON.stringify(user));
 }
 
-export function seeddata() { //funcion para inicializar los datos en el localstorage, si no hay usuarios ni tareas, se crean algunos por defecto
+export function clearSession() { //funcion para eliminar la sesion del localstorage
+    localStorage.removeItem(SESSION_KEY);
+}
+
+export function seedData() { //funcion para inicializar los datos en el localstorage, si no hay usuarios ni tareas, se crean algunos por defecto
     if (!localStorage.getItem(USERS_KEYS)) { 
         saveUsers([
             {id_usuario: 1, nombre_usuario: "admin", contraseña: "Admin123", rol: "Administrador"},
