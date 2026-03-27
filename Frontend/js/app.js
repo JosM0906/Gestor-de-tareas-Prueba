@@ -4,6 +4,11 @@ import { createUser } from "./users.js"; //importa la función createUser desde 
 import { createTask  } from "./tasks.js"; //importa las funciones relacionadas con las tareas desde el módulo tasks.js para manejar la creación, obtención y actualización de tareas
 import { validateDates } from "./validators.js"; //importa la función validateDates desde el módulo validators.js para validar las fechas de creación y vencimiento de las tareas
 import { renderTasks, renderUserInfo, renderTaskUserOptions } from "./dom.js"; //importa las funciones relacionadas con la manipulación del DOM desde el módulo dom.js para renderizar las tareas, la información del usuario y las opciones de usuario en el formulario de creación de tareas
+import { emitEvent, onEvent } from "./events.js"; //importa la función emitEvent desde el módulo events.js para emitir eventos personalizados en la aplicación, aunque en este código no se utiliza directamente, podría ser útil para futuras funcionalidades o para mantener una arquitectura basada en eventos
+
+onEvent("taskCreated", () => {
+    renderTasks(currentUser());
+});
 
 
 seedData(); //llama a la función seedData() para inicializar los datos en el localstorage
@@ -26,7 +31,6 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
 
     renderUserInfo(user);
     renderTaskUserOptions(user);
-    renderTasks(user);
 
     if (isAdmin()) {
         adminSection.classList.remove("hidden");
@@ -69,7 +73,7 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
         return;
         }
 
-        createTask({
+        createTask({ //creamos un nuevo objeto de tarea con la información proporcionada, el id de la tarea se genera utilizando Date.now() para asegurar que sea único, luego se llama a la función createTask() del módulo tasks.js para guardar la nueva tarea en el localstorage
             id_tarea: Date.now(),
             titulo,
             estado,
@@ -78,20 +82,21 @@ function loadApp() { //función para cargar la aplicación, verifica si hay un u
             id_usuario: idUsuario
         });
 
-        document.getElementById("task-message").textContent = "Tarea creada exitosamente.";
+        emitEvent("taskCreated"); //emitimos un evento personalizado "taskCreated" para notificar que se ha creado una nueva tarea, nto, podría ser útil para futuras funcionalidades o para mantener una arquitectura basada en eventos
+
+        document.getElementById("task-message").textContent = // emitimos un evento personalizado "taskCreated" para actualizar la interfaz dinámicamente "Tarea creada exitosamente.";
         e.target.reset();
         renderTaskUserOptions(user);
-        renderTasks(user);
     });
 
     document.getElementById("user-form").addEventListener("submit", (e) => { //agrega un evento de envío al formulario de creación de usuarios, al enviar el formulario se previene el comportamiento por defecto, se obtiene el nombre de usuario, la contraseña y el rol para el nuevo usuario, se crea un nuevo objeto de usuario con la información proporcionada y se llama a la función createUser() del módulo users.js para guardar el nuevo usuario en el localstorage, luego se limpia el formulario y se muestra un mensaje indicando si el usuario fue creado exitosamente o si hubo un error (por ejemplo, si el nombre de usuario ya está en uso)
         e.preventDefault();
 
-        const username = document.getElementById("new-username").value;
-        const password = document.getElementById("new-password").value;
+        const username = document.getElementById("new-username").value; //obtenemos el nombre de usuario ingresado en el formulario de creación de usuarios
+        const password = document.getElementById("new-password").value; //obtenemos la contraseña ingresada en el formulario de creación de usuarios
         const role = document.getElementById("new-role").value;
 
-        const result = createUser({
+        const result = createUser({ //creamos un nuevo objeto de usuario con la información proporcionada, el id del usuario se genera utilizando Date.now() para asegurar que sea único, luego se llama a la función createUser() del módulo users.js para guardar el nuevo usuario en el localstorage
             id_usuario: Date.now(),
             nombre_usuario: username,
             contraseña: password,
